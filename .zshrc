@@ -10,17 +10,19 @@ fi
  
 # Source Znap
 zstyle ':znap:*' git-dir ~/repos/zsh-snap
-source ~/repos/zsh-snap/zsh-snap/znap.zsh
+source ~/sources/zsh-snap/zsh-snap/znap.zsh
  
 znap source powerlevel10k
  
 # configure $PATH
 path=(
-        /home/loh/.local/{bin,sbin}
-    /home/loh/.local/conda/{bin,sbin}
-        /home/loh/.local/neovim/{bin,sbin}
-        $path
+    /home/loh/.local/{bin,sbin}
+    /home/loh/.local/{conda,neovim}/{bin,sbin}
+    $path
 )
+
+export LD_LIBRARY_PATH=$HOME/.local/lib
+export TERM=screen-256color
  
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 znap source zsh-users/zsh-syntax-highlighting
@@ -39,3 +41,10 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
  
 # Alias
 alias ls='ls --color=auto'
+alias pyinit='eval "$(conda shell.bash hook)"'
+
+# ZSH settings
+HISTFILE=~/.zsh_history
+HISTSIZE=10240
+SAVEHIST=10240
+setopt appendhistory
